@@ -68,7 +68,7 @@ module.exports = {
   devServer: {
     open: '/pages',
     watchFiles: ['app/pug/**/*'],
-    host: "local-ip",
+    host: 'local-ip',
     port: 1200,
   },
   mode: mode,
@@ -86,53 +86,17 @@ module.exports = {
       },
     },
     minimizer: [
-      //Gif
+      // Сжатие изображений
       new ImageMinimizerPlugin({
-        test: /\.gif$/i,
-        minimizer: {
-          implementation: ImageMinimizerPlugin.imageminMinify,
-          options: {
-            plugins: [['gifsicle', { interlaced: true, optimizationLevel: 3 }]],
-          },
-        },
-      }),
-      // Jpeg
-      new ImageMinimizerPlugin({
-        test: /\.(jpg|jpeg)$/i,
-        minimizer: {
-          implementation: ImageMinimizerPlugin.imageminMinify,
-          options: {
-            plugins: [['mozjpeg', { progressive: true, quality: 70 }]],
-          },
-        },
-      }),
-      // Png
-      new ImageMinimizerPlugin({
-        test: /\.png$/i,
-        minimizer: {
-          implementation: ImageMinimizerPlugin.imageminMinify,
-          options: {
-            plugins: [['pngquant', { quality: [0.6, 0.8] }]],
-          },
-        },
-      }),
-      // Webp
-      new ImageMinimizerPlugin({
-        test: /\.webp$/i,
-        minimizer: {
-          implementation: ImageMinimizerPlugin.imageminMinify,
-          options: {
-            plugins: [['webp', { quality: 75 }]],
-          },
-        },
-      }),
-      // Svg
-      new ImageMinimizerPlugin({
-        test: /\.svg$/i,
+        test: /\.(jpg|jpeg|gif|png|svg)$/i,
+        exclude: /node_modules/,
         minimizer: {
           implementation: ImageMinimizerPlugin.imageminMinify,
           options: {
             plugins: [
+              ['gifsicle', { interlaced: true, optimizationLevel: 3 }],
+              ['mozjpeg', { progressive: true, quality: 70 }],
+              ['pngquant', { quality: [0.6, 0.8] }],
               [
                 'svgo',
                 {
@@ -160,6 +124,18 @@ module.exports = {
           },
         },
       }),
+
+      // Сжатие Webp
+      new ImageMinimizerPlugin({
+        test: /\.(png|jpe?g|webp|gif)$/i,
+        minimizer: {
+          implementation: ImageMinimizerPlugin.imageminMinify,
+          options: {
+            plugins: [['webp', { quality: 75 }]],
+          },
+        },
+      }),
+
       // Минификация JS
       new TerserPlugin({
         test: /\.js(\?.*)?$/i,
@@ -175,8 +151,8 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'pug-loader',
         options: {
-          pretty: true
-        }
+          pretty: true,
+        },
       },
       // CSS
       {
