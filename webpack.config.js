@@ -8,10 +8,19 @@ const path = require('path'),
   webpack = require('webpack');
 
 let mode = 'development',
-  target = 'web';
-if (process.env.NODE_ENV === 'production') {
-  mode = 'production';
-  target = 'browserslist';
+  target = 'web',
+  debug;
+
+switch (process.env.NODE_ENV) {
+  case 'production':
+    mode = 'production';
+    target = 'browserslist';
+    break;
+
+  case 'debug':
+    target = 'browserslist';
+    debug = true;
+    break;
 }
 
 let plugins = [
@@ -165,37 +174,39 @@ module.exports = {
               url: false,
             },
           },
-          (mode === 'production'
-          ? {
-              loader: 'postcss-loader',
-              options: {
-                postcssOptions: {
-                  plugins: [
-                    [
-                      'postcss-preset-env',
-                      {
-                        // Options
-                      },
+          mode === 'production' || debug
+            ? {
+                loader: 'postcss-loader',
+                options: {
+                  postcssOptions: {
+                    plugins: [
+                      [
+                        'postcss-preset-env',
+                        {
+                          // Options
+                        },
+                      ],
                     ],
-                  ],
+                  },
                 },
-              },
-            }
-          : undefined),
+              }
+            : undefined,
           'sass-loader',
-        ].filter(x => x !== undefined),
+        ].filter((x) => x !== undefined),
       },
       // JavaScript
-      {
-        test: /\.m?js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
-      },
-    ],
+      mode === 'production' || debug
+        ? {
+            test: /\.m?js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env'],
+              },
+            },
+          }
+        : undefined,
+    ].filter((x) => x !== undefined),
   },
 };
