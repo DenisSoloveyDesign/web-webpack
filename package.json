@@ -60,7 +60,8 @@
     "imask": "^6.4.2",
     "jquery": "^3.6.0",
     "jshint": "^2.13.4",
-    "scrolly": "^0.6.0",
+    "nouislider": "^15.6.0",
+    "simplebar": "^5.3.8",
     "swiper": "^8.0.5",
     "validate.js": "^0.13.1"
   }
