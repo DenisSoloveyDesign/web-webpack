@@ -13,10 +13,12 @@
     "> 1%"
   ],
   "keywords": [],
-  "author": "",
+  "author": "Denis Soloviev",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.17.2",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/eslint-plugin": "^7.17.7",
     "@babel/preset-env": "^7.16.11",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.4",
