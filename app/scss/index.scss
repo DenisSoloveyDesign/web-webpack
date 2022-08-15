@@ -1,7 +1,8 @@
 @import './fonts';
 @import './reset';
 @import './styles';
-@import './base';
-@import './combinations';
-@import './modules';
+@import './keyframes';
+@import './base/index.scss';
+@import './combinations/index.scss';
+@import './modules/index.scss';
 @import './media';
