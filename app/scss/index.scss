@@ -1,8 +1,23 @@
-@import './fonts';
-@import './reset';
-@import './styles';
-@import './keyframes';
-@import './base/index.scss';
-@import './combinations/index.scss';
-@import './modules/index.scss';
-@import './media';
+/* ================================ Fonts ================================ */
+@import './fonts.scss';
+
+/* ================================ Animations ================================ */
+@import './_animations/**/*.scss';
+
+/* ================================ Styles ================================ */
+@import './_styles/*.scss';
+
+/* ================================ Reset ================================ */
+@import './reset.scss';
+
+/* ================================ Base ================================ */
+@import './-base/**/*.scss';
+
+/* ================================ Combinations ================================ */
+@import './-combinations/**/*.scss';
+
+/* ================================ Modules ================================ */
+@import './-modules/**/*.scss';
+
+/* ================================ Global Modifications ================================ */
+@import './mods/**/*.scss';

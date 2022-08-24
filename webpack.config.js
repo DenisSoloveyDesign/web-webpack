@@ -154,6 +154,19 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        enforce: 'pre',
+        loader: 'webpack-glob-loader'
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        enforce: 'pre',
+        use: [
+          { loader: 'webpack-glob-loader' }
+        ]
+      },
       // Pug
       {
         test: /\.pug$/,
